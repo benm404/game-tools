@@ -492,7 +492,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.06433938, y: 0.000000008585366, z: -5.5352395e-10, w: 0.9979281}
+  m_LocalRotation: {x: 0.06433938, y: -0.000000008585366, z: 5.5352395e-10, w: 0.9979281}
   m_LocalPosition: {x: 0, y: 3, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2394,7 +2394,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 944111653}
-  m_LocalRotation: {x: 0.06433938, y: 0.000000004292683, z: -2.76762e-10, w: 0.9979281}
+  m_LocalRotation: {x: 0.06433938, y: -0.0000000042926827, z: 2.7676197e-10, w: 0.9979281}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4017,7 +4017,6 @@ GameObject:
   - component: {fileID: 919132149117390308}
   - component: {fileID: 919132149117390307}
   - component: {fileID: 919132149117390306}
-  - component: {fileID: 919132149117390305}
   m_Layer: 0
   m_Name: Spacesuit
   m_TagString: Untagged
@@ -4025,19 +4024,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &919132149117390305
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132149117390304}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccabf17c78ddbc941b6962518c8a4305, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Velocity: {x: 0, y: 0, z: 0}
 --- !u!95 &919132149117390306
 Animator:
   serializedVersion: 4
@@ -4072,6 +4058,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MouseDelta: {x: 0, y: 0}
   MoveComposite: {x: 0, y: 0}
+  Velocity: {x: 0, y: 0, z: 0}
+  MovementSpeed: 5
+  AirSpeedMultiplier: 1.6
+  JumpForce: 5
+  DashMultiply: 2
+  DashSpeed: 0
+  HideSpeed: 2
+  Stamina: 100
+  HideStamina: 100
+  StaminaDrain: 20
+  Dash: 0
+  Hide: 0
 --- !u!143 &919132149117390308
 CharacterController:
   m_ObjectHideFlags: 0
@@ -4086,7 +4084,7 @@ CharacterController:
   m_Height: 1.87
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.4
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0.12}
