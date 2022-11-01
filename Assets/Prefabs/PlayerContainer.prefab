@@ -2337,8 +2337,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6989677434692982301}
   m_Layer: 0
-  m_Name: Player
-  m_TagString: Untagged
+  m_Name: PlayerContainer
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3709,7 +3709,7 @@ GameObject:
   - component: {fileID: 7908667609320842939}
   - component: {fileID: 7908667609320842938}
   m_Layer: 0
-  m_Name: Spacesuit
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

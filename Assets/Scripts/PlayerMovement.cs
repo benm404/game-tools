@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour, PlayerController.IMovementActions
 {
     public Vector2 MouseDelta;
     public Vector2 MoveComposite;
-
+    
     public Action OnJumpPerformed;
     public Action OnHidePerformed;
     public Action OnDashPerformed;
@@ -92,7 +92,7 @@ public class PlayerMovement : MonoBehaviour, PlayerController.IMovementActions
         {
             Stamina += StaminaDrain * Time.deltaTime;
         }
-        if (Velocity.x > 0.1f || Velocity.z > 0.1f)
+        if (Velocity.x > 0.1f || Velocity.z > 0.1f || Velocity.x < -0.1f || Velocity.z < -0.1f)
         {
             if (Dash && Stamina > 0f)
             {
