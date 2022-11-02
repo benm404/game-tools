@@ -36,4 +36,15 @@ public class GameManager : MonoBehaviour
             print("I will exit on unity builds");
         }
     }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+        print("I will exit on unity builds");
+    }
+
+    public void ReloadLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }

@@ -1,6 +1,8 @@
+using Cinemachine;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Processors;
 
 public class PlayerMovement : MonoBehaviour, PlayerController.IMovementActions
 {
@@ -23,12 +25,19 @@ public class PlayerMovement : MonoBehaviour, PlayerController.IMovementActions
     public float StaminaDrain = 5f;
     public bool Dash = false;
     public bool Hide = false;
+    public bool Dead = false;
     public float LookRotationDampFactor { get; private set; } = 10f;
     public Transform MainCamera { get; private set; }
     public Animator Animator { get; private set; }
     public CharacterController Controller { get; private set; }
 
     private PlayerController controls;
+
+    public GameObject DeathScreen;
+
+    public GameObject FinishScreen;
+
+    private GameObject CMCam;
 
     public void Awake()
     {
@@ -45,6 +54,8 @@ public class PlayerMovement : MonoBehaviour, PlayerController.IMovementActions
         Velocity.y = Physics.gravity.y;
 
         DashSpeed = DashMultiply * MovementSpeed;
+
+        CMCam = GameObject.FindGameObjectWithTag("CMCam");
     }
 
     private void OnEnable()
@@ -64,6 +75,19 @@ public class PlayerMovement : MonoBehaviour, PlayerController.IMovementActions
 
     private void Update()
     {
+        if (Dead)
+        {
+            Velocity = Vector3.zero;
+            controls.Movement.Disable();
+            DeathScreen.gameObject.SetActive(true);
+            print("Death");
+            Cursor.lockState = CursorLockMode.None;
+
+            CMCam.GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed = 0;
+            CMCam.GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed = 0;
+
+        }
+
         CalculateMoveDirection();
         FaceMoveDirection();
         Move();
@@ -206,5 +230,20 @@ public class PlayerMovement : MonoBehaviour, PlayerController.IMovementActions
     void Move()
     {
         Controller.Move(Velocity * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("FinishTrigger"))
+        {
+            FinishScreen.gameObject.SetActive(true);
+            Velocity = Vector3.zero;
+            controls.Movement.Disable();
+            print("Win");
+            Cursor.lockState = CursorLockMode.None;
+
+            CMCam.GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed = 0;
+            CMCam.GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed = 0;
+        }
     }
 }

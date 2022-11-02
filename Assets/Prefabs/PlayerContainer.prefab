@@ -2621,7 +2621,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6989677435368926077}
-  m_LocalRotation: {x: 0.06433938, y: -0.000000004292683, z: 2.76762e-10, w: 0.9979281}
+  m_LocalRotation: {x: 0.06433938, y: 0.0000000042926827, z: -2.7676197e-10, w: 0.9979281}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3070,7 +3070,7 @@ GameObject:
   - component: {fileID: 6989677436417712212}
   m_Layer: 0
   m_Name: CM FreeLook1
-  m_TagString: Untagged
+  m_TagString: CMCam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3780,6 +3780,11 @@ MonoBehaviour:
   StaminaDrain: 20
   Dash: 0
   Hide: 0
+  Dead: 0
+  DeathScreen: {fileID: 5685191738969149516, guid: 2472043297fe0a84780580f2feb00dd5,
+    type: 3}
+  FinishScreen: {fileID: 5685191738969149516, guid: 2472043297fe0a84780580f2feb00dd5,
+    type: 3}
 --- !u!95 &7908667609320842938
 Animator:
   serializedVersion: 4
