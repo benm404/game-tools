@@ -86,6 +86,14 @@ public class PlayerMovement : MonoBehaviour, PlayerController.IMovementActions
             CMCam.GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed = 0;
             CMCam.GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed = 0;
 
+            Animator.enabled = false;
+
+        }
+
+        //Animator idle if no input or falling detected
+        if(Velocity.x < 0.1f || Velocity.z < 0.1f || Velocity.x > -0.1f || Velocity.z > -0.1f && !Dead)
+        {
+            Animator.SetInteger("State", 0);
         }
 
         CalculateMoveDirection();
@@ -105,6 +113,9 @@ public class PlayerMovement : MonoBehaviour, PlayerController.IMovementActions
         if (!Controller.isGrounded)
         {
             ApplyGravity();
+
+            //Animator fall when player is falling
+            Animator.SetInteger("State", 4);
         }
 
         if(Stamina <= 0f)
@@ -118,9 +129,22 @@ public class PlayerMovement : MonoBehaviour, PlayerController.IMovementActions
         }
         if (Velocity.x > 0.1f || Velocity.z > 0.1f || Velocity.x < -0.1f || Velocity.z < -0.1f)
         {
+            //Animation walk when player is moving
+            if (Controller.isGrounded)
+            {
+                Animator.SetInteger("State", 1);
+            }
+
+
             if (Dash && Stamina > 0f)
             {
                 Stamina -= StaminaDrain * Time.deltaTime;
+
+                //Animation run when player is sprinting
+                if (Controller.isGrounded)
+                {
+                    Animator.SetInteger("State", 2);
+                }
             }
         }
         if (HideStamina <= 0f)
@@ -136,6 +160,11 @@ public class PlayerMovement : MonoBehaviour, PlayerController.IMovementActions
         if (Hide && HideStamina > 0f)
         {
             HideStamina -= StaminaDrain * Time.deltaTime;
+            //Animation creep when player is creeping
+            if (Controller.isGrounded)
+            {
+                Animator.SetInteger("State", 5);
+            }
         }
     }
 
@@ -154,6 +183,9 @@ public class PlayerMovement : MonoBehaviour, PlayerController.IMovementActions
         if (Controller.isGrounded)
         {
             Velocity = new Vector3(Velocity.x, JumpForce, Velocity.z);
+
+            //Animation jump when jump is pressed
+            Animator.SetInteger("State", 3);
         }
     }
 
