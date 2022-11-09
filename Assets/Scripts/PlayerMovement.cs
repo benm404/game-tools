@@ -1,5 +1,6 @@
 using Cinemachine;
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Processors;
@@ -8,7 +9,7 @@ public class PlayerMovement : MonoBehaviour, PlayerController.IMovementActions
 {
     public Vector2 MouseDelta;
     public Vector2 MoveComposite;
-    
+
     public Action OnJumpPerformed;
     public Action OnHidePerformed;
     public Action OnDashPerformed;
@@ -20,6 +21,7 @@ public class PlayerMovement : MonoBehaviour, PlayerController.IMovementActions
     public float DashMultiply = 2f;
     public float DashSpeed;
     public float HideSpeed = 2f;
+    [Range(0, 100)] public float Health = 100f;
     [Range(0, 100)] public float Stamina = 100f;
     [Range(0, 100)] public float HideStamina = 100f;
     public float StaminaDrain = 5f;
@@ -39,6 +41,9 @@ public class PlayerMovement : MonoBehaviour, PlayerController.IMovementActions
 
     private GameObject CMCam;
 
+    private GameManager GameManager;
+    private GameObject gameManager;
+
     public void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -56,6 +61,10 @@ public class PlayerMovement : MonoBehaviour, PlayerController.IMovementActions
         DashSpeed = DashMultiply * MovementSpeed;
 
         CMCam = GameObject.FindGameObjectWithTag("CMCam");
+
+        gameManager = GameObject.Find("GameManager");
+
+        GameManager = gameManager.GetComponent<GameManager>();
     }
 
     private void OnEnable()
@@ -75,6 +84,10 @@ public class PlayerMovement : MonoBehaviour, PlayerController.IMovementActions
 
     private void Update()
     {
+        if (Health <= 0)
+        {
+            Dead = true;
+        }
         if (Dead)
         {
             Velocity = Vector3.zero;
@@ -91,7 +104,7 @@ public class PlayerMovement : MonoBehaviour, PlayerController.IMovementActions
         }
 
         //Animator idle if no input or falling detected
-        if(Velocity.x < 0.1f || Velocity.z < 0.1f || Velocity.x > -0.1f || Velocity.z > -0.1f && !Dead)
+        if (Velocity.x < 0.1f || Velocity.z < 0.1f || Velocity.x > -0.1f || Velocity.z > -0.1f && !Dead)
         {
             Animator.SetInteger("State", 0);
         }
@@ -100,12 +113,12 @@ public class PlayerMovement : MonoBehaviour, PlayerController.IMovementActions
         FaceMoveDirection();
         Move();
 
-        if(Stamina > 100f)
+        if (Stamina > 100f)
         {
             Stamina = 100f;
         }
 
-        if(HideStamina > 100f)
+        if (HideStamina > 100f)
         {
             HideStamina = 100f;
         }
@@ -118,7 +131,7 @@ public class PlayerMovement : MonoBehaviour, PlayerController.IMovementActions
             Animator.SetInteger("State", 4);
         }
 
-        if(Stamina <= 0f)
+        if (Stamina <= 0f)
         {
             Dash = false;
         }
@@ -212,7 +225,7 @@ public class PlayerMovement : MonoBehaviour, PlayerController.IMovementActions
         if (context.canceled)
         {
             Hide = false;
-        }        
+        }
     }
 
     void CalculateMoveDirection()
@@ -277,5 +290,11 @@ public class PlayerMovement : MonoBehaviour, PlayerController.IMovementActions
             CMCam.GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed = 0;
             CMCam.GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed = 0;
         }
+
+        if (other.gameObject.CompareTag("Coin"))
+        {
+            GameManager.Score += 5;
+        }
     }
+
 }

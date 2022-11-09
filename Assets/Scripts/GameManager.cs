@@ -10,11 +10,13 @@ public class GameManager : MonoBehaviour
     PlayerMovement PlayerMovement;
     public Slider DashSlider;
     public Slider HideSlider;
+    public Slider HealthSlider;
+    public int Score;
     
     void Start()
     {
         PlayerMovement = GameObject.FindWithTag("Player").GetComponent < PlayerMovement > ();
-        
+        Score = 0;
     }
 
     
@@ -22,6 +24,7 @@ public class GameManager : MonoBehaviour
     {
         DashSlider.value = PlayerMovement.Stamina;
         HideSlider.value = PlayerMovement.HideStamina;
+        HealthSlider.value = PlayerMovement.Health;
 
         // Reload the current scene when R & - are pressed
         if (Input.GetKey(KeyCode.R) && Input.GetKeyDown(KeyCode.Minus))

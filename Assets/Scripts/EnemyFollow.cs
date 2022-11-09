@@ -32,7 +32,9 @@ public class EnemyFollow : MonoBehaviour
         if(other.tag == "Player")
         {
             InRange = false;
+            Agent.speed = 6f;
         }
+        
     }
 
     private void Update()
@@ -55,7 +57,8 @@ public class EnemyFollow : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            PlayerMovement.Dead = true;
+            PlayerMovement.Health -= 30f;
+            Agent.speed = 0f;
             print("Player collision with enemy");
         }
     }
