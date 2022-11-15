@@ -31,8 +31,7 @@ public class EnemyFollow : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            InRange = false;
-            Agent.speed = 6f;
+            InRange = false; 
         }
         
     }
@@ -58,7 +57,7 @@ public class EnemyFollow : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             PlayerMovement.Health -= 30f;
-            Agent.speed = 0f;
+            Agent.velocity = Vector3.zero;
             print("Player collision with enemy");
         }
     }
