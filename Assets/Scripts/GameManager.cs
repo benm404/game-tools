@@ -34,23 +34,5 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
-
-        // Quit the application when Escape is pressed
-        if (Input.GetKey(KeyCode.Escape))
-        {
-            Application.Quit();
-            print("I will exit on unity builds");
-        }
-    }
-
-    public void ExitGame()
-    {
-        Application.Quit();
-        print("I will exit on unity builds");
-    }
-
-    public void ReloadLevel()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

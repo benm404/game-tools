@@ -10,6 +10,7 @@ TagManager:
   - DeathScreen
   - FinishScreen
   - Coin
+  - PauseScreen
   layers:
   - Default
   - TransparentFX

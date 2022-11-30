@@ -39,10 +39,15 @@ public class PlayerMovement : MonoBehaviour, PlayerController.IMovementActions
 
     public GameObject FinishScreen;
 
+    public GameObject PauseScreen;
+
     private GameObject CMCam;
 
     private GameManager GameManager;
     private GameObject gameManager;
+
+    public static bool Paused = false;
+    bool Finished = false;
 
     public void Awake()
     {
@@ -65,6 +70,10 @@ public class PlayerMovement : MonoBehaviour, PlayerController.IMovementActions
         gameManager = GameObject.Find("GameManager");
 
         GameManager = gameManager.GetComponent<GameManager>();
+
+        Paused = false;
+
+        Time.timeScale = 1f;
     }
 
     private void OnEnable()
@@ -84,6 +93,13 @@ public class PlayerMovement : MonoBehaviour, PlayerController.IMovementActions
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Paused = !Paused;
+            PauseGame();
+        }
+        
+
         if (Health <= 0)
         {
             Dead = true;
@@ -109,9 +125,11 @@ public class PlayerMovement : MonoBehaviour, PlayerController.IMovementActions
             Animator.SetInteger("State", 0);
         }
 
-        CalculateMoveDirection();
-        FaceMoveDirection();
-        Move();
+
+            CalculateMoveDirection();
+            FaceMoveDirection();
+            Move();
+
 
         if (Stamina > 100f)
         {
@@ -183,7 +201,11 @@ public class PlayerMovement : MonoBehaviour, PlayerController.IMovementActions
 
     public void OnLook(InputAction.CallbackContext context)
     {
-        MouseDelta = context.ReadValue<Vector2>();
+        if (!Paused)
+        {
+            MouseDelta = context.ReadValue<Vector2>();
+        }
+        else { }
     }
 
     public void OnWalk(InputAction.CallbackContext context)
@@ -281,14 +303,7 @@ public class PlayerMovement : MonoBehaviour, PlayerController.IMovementActions
     {
         if (other.gameObject.CompareTag("FinishTrigger"))
         {
-            FinishScreen.gameObject.SetActive(true);
-            Velocity = Vector3.zero;
-            controls.Movement.Disable();
-            print("Win");
-            Cursor.lockState = CursorLockMode.None;
-
-            CMCam.GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed = 0;
-            CMCam.GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed = 0;
+            Finish();
         }
 
         if (other.gameObject.CompareTag("Coin"))
@@ -297,4 +312,34 @@ public class PlayerMovement : MonoBehaviour, PlayerController.IMovementActions
         }
     }
 
+    private void PauseGame()
+    {
+        if (Paused)
+        {
+            Time.timeScale = 0f;
+            AudioListener.pause = true;
+            controls.Movement.Disable();
+            CMCam.GetComponent<CinemachineInputProvider>().enabled = false;
+            PauseScreen.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            AudioListener.pause = false;
+            controls.Movement.Enable();
+            CMCam.GetComponent<CinemachineInputProvider>().enabled = true;
+            PauseScreen.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+    }
+
+    private void Finish()
+    {
+        Time.timeScale = 0f;
+        CMCam.GetComponent<CinemachineInputProvider>().enabled = false;
+        FinishScreen.gameObject.SetActive(true);
+        print("Win");
+        Cursor.lockState = CursorLockMode.None;
+    }
 }
