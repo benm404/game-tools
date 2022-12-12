@@ -31,7 +31,7 @@ public class PathFollow : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && transform.position == target[0].position)
         {
             Move = true;
         }

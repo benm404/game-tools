@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneSwitcher : MonoBehaviour
 {
+    private bool enabled = false;
+
     public void LoadMainMenu()
     {
         SceneManager.LoadScene(0);
@@ -24,5 +26,15 @@ public class SceneSwitcher : MonoBehaviour
     public void ReloadLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void ObjectEnable(GameObject obj)
+    {
+        //bool enabled = false;
+        enabled = !enabled;
+        if (enabled)
+        {
+            obj.SetActive(true);
+        } else { obj.SetActive(false); }
     }
 }

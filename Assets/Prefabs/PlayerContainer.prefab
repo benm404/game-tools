@@ -2510,7 +2510,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6989677435050345130}
-  m_LocalRotation: {x: 0.08233173, y: 0.059836827, z: -0.004952248, w: 0.99479467}
+  m_LocalRotation: {x: 0.08248053, y: 0.00013908418, z: -0.000011510956, w: 0.9965927}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2619,7 +2619,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6989677435368926077}
-  m_LocalRotation: {x: 0.064223304, y: 0.059917033, z: -0.0038630273, w: 0.9961277}
+  m_LocalRotation: {x: 0.06433937, y: 0.00013926942, z: -0.000008979109, w: 0.9979281}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2951,7 +2951,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6989677436249840739}
-  m_LocalRotation: {x: 0.046141528, y: 0.059977233, z: -0.0027754102, w: 0.99712896}
+  m_LocalRotation: {x: 0.046224914, y: 0.00013941366, z: -0.0000064512797, w: 0.99893105}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3032,7 +3032,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6989677436417712209}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.7191973, y: 2.5, z: -5.956741}
+  m_LocalPosition: {x: -0.0016746521, y: 2.5, z: -6.0000005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3132,7 +3132,7 @@ MonoBehaviour:
     m_RecenteringTime: 2
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
-  m_BindingMode: 5
+  m_BindingMode: 4
   m_SplineCurvature: 0.2
   m_Orbits:
   - m_Height: 4.5
@@ -3736,6 +3736,7 @@ MonoBehaviour:
     type: 3}
   FinishScreen: {fileID: 5685191738969149516, guid: 2472043297fe0a84780580f2feb00dd5,
     type: 3}
+  PauseScreen: {fileID: 0}
 --- !u!95 &7908667609320842938
 Animator:
   serializedVersion: 4
